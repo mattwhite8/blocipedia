@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
     self.role ||= 'standard'
   end
   
+  def upgrade_to_premium
+    self.update_attribute(:role, "premium")
+  end
+  
   def admin?
     role == 'admin'
   end

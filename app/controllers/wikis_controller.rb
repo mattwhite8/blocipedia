@@ -1,7 +1,6 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.visible_to(current_user) 
-    authorize @wikis
+    @wikis = policy_scope(Wiki) 
   end
 
   def show
@@ -25,11 +24,13 @@ class WikisController < ApplicationController
   end
 
   def edit
+    @users = User.all
     @wiki = Wiki.find(params[:id])
     authorize @wiki
   end
   
   def update
+    
     @wiki = Wiki.find(params[:id])
     authorize @wiki
     if @wiki.update_attributes(wiki_params)
@@ -57,7 +58,7 @@ class WikisController < ApplicationController
   private
   
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :private)
+    params.require(:wiki).permit(:title, :body, :private, :collaboration_user_ids => [ ] )
   end
    
   

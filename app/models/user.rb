@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable, :confirmable
   
   has_many :wikis
+  has_many :collaborations
+  has_many :collaboration_wikis, through: :collaborations, :source => :wiki
   
   after_initialize :set_default_role
   

@@ -2,6 +2,7 @@ require 'faker'
 
 User.delete_all
 Wiki.delete_all
+Collaboration.delete_all
 
 #Create an admin user
 admin = User.new(
@@ -16,6 +17,15 @@ admin.save!
 member = User.new(
   name:    'Member User',
   email:   'member@example.com',
+  password:'helloworld'
+  )
+member.skip_confirmation!
+member.save!
+
+#Create a member
+member = User.new(
+  name:    'Matt',
+  email:   'matt@example.com',
   password:'helloworld'
   )
 member.skip_confirmation!

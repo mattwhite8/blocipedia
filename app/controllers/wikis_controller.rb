@@ -30,7 +30,6 @@ class WikisController < ApplicationController
   end
   
   def update
-    
     @wiki = Wiki.find(params[:id])
     authorize @wiki
     if @wiki.update_attributes(wiki_params)
